@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TDK查看器</title>
+    <meta charset="utf-8" />
+    <link href="js/layui/css/layui.css" rel="stylesheet" />
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/tdk.js"></script>
+    <style>
+        body { width: 800px; min-height: 100px; }
+
+        /*#tbl_pageinfo { font-size: 1.2em; color: #303942; width: 546px; margin: 0px 0px 8px 0px; border-spacing: 0; border-collapse: collapse; }*/
+        #tbl_pageinfo td { padding: 4px; vertical-align: top; }
+        .tr_head { height: 28px; font-weight: bold; color: #505962; border: 1px solid #E0E0E0; border-bottom: 1px solid #eeeeee; background: -webkit-gradient(linear,0% 0,0% 100%,from(#f7f7f7),to(#eeeeee)); }
+
+        #lbl_length { text-align: center; white-space: nowrap; }
+        .td_subject { width: 130px; font-weight: bold; color: #505962 }
+        .td_info { word-wrap: break-word; word-break: break-all; }
+        .td_num { text-align: center; width: 50px; }
+        .tr_item { border: 1px solid #EAEAEA; }
+        .tr_bg1 { background: #ffffff }
+        .tr_bg2 { background: #fdfdfd }
+    </style>
+</head>
+
+<body>
+    <div style="padding:10px;">
+        <h1>TDK查看器<a class="layui-btn layui-btn-xs" id="btnRefresh">刷新</a></h1>
+        <div id="content">
+            <table id="tbl_pageinfo" class="layui-table">
+                <thead>
+                    <tr class="tr_head">
+                        <td>标签</td>
+                        <td>内容</td>
+                        <td id="lbl_length">长度</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tr_item tr_bg1">
+                        <td class="td_subject" id="lbl_url">网址:</td>
+                        <td class="td_info" id="td_url"></td>
+                        <td class="td_num" id="td_url_num"></td>
+                    </tr>
+
+                    <tr class="tr_item tr_bg2">
+                        <td class="td_subject" id="lbl_title">标题:</td>
+                        <td class="td_info" id="td_title"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_title_num"></td>
+                    </tr>
+                    <tr class="tr_item tr_bg1">
+                        <td class="td_subject" id="lbl_key">Meta 关键词:</td>
+                        <td class="td_info" id="td_key"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_key_num"></td>
+                    </tr>
+                    <tr class="tr_item tr_bg2">
+                        <td class="td_subject" id="lbl_desc">Meta 描述信息:</td>
+                        <td class="td_info" id="td_desc"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_desc_num"></td>
+                    </tr>
+                    <tr class="tr_item tr_bg2">
+                        <td class="td_subject" id="lbl_lnk_canonical">Canonical URL:</td>
+                        <td class="td_info" id="td_lnk_canonical"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_lnk_canonical_num">&nbsp;</td>
+                    </tr>
+                    <!--<tr class="tr_item tr_bg2">
+                        <td class="td_subject" id="lbl_desc">Meta Robots:</td>
+                        <td class="td_info" id="td_robots"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_robots_num"></td>
+                    </tr>-->
+                    <!--<tr class="tr_item tr_bg1">
+                        <td class="td_subject" id="lbl_lnk_out">出站链接数:</td>
+                        <td class="td_info" id="td_lnk_external"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num">&nbsp;</td>
+                    </tr>
+                    <tr class="tr_item tr_bg2">
+                        <td class="td_subject" id="lbl_lnk_in">内部链接数:</td>
+                        <td class="td_info" id="td_lnk_internal"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num">&nbsp;</td>
+                    </tr>-->
+                    <tr class="tr_item tr_bg1">
+                        <td class="td_subject" id="lbl_h1">H1:</td>
+                        <td class="td_info" id="td_h1"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_h1_num">&nbsp;</td>
+                    </tr>
+                    <tr class="tr_item tr_bg2">
+                        <td class="td_subject" id="lbl_h2">H2:</td>
+                        <td class="td_info" id="td_h2"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_h2_num">&nbsp;</td>
+                    </tr>
+                    <!--<tr class="tr_item tr_bg1">
+                        <td class="td_subject" id="lbl_b">粗体:</td>
+                        <td class="td_info" id="td_b"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_b_num">&nbsp;</td>
+                    </tr>-->
+                    <!--<tr class="tr_item tr_bg2">
+                        <td class="td_subject" id="lbl_i">斜体:</td>
+                        <td class="td_info" id="td_i"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_i_num">&nbsp;</td>
+                    </tr>-->
+                    <!--<tr class="tr_item tr_bg1">
+                        <td class="td_subject" id="lbl_alt">ALT 文本:</td>
+                        <td class="td_info" id="td_alt"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_alt_num">&nbsp;</td>
+                    </tr>-->
+                    <tr class="tr_item tr_bg2">
+                        <td class="td_subject" id="lbl_body">正文:</td>
+                        <td class="td_info" id="td_body"><img src="img/loading.gif" class="icon_16"></td>
+                        <td class="td_num" id="td_body_num">&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <textarea id="txtMsg" value="a" class="layui-textarea"></textarea>
+        </div>
+    </div>
+</body>
+
+</html>
