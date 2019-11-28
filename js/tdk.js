@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 chrome.extension.onMessage.addListener(function (pageInfo) {
     debugger;
     $("#txtMsg").val(JSON.stringify(pageInfo));
-    setItem("td_url", pageInfo.url);
+    setItem("td_url", decodeURIComponent(pageInfo.url));
     setItem("td_title", pageInfo.title);
     setItem("td_key", pageInfo.keywords);
     setItem("td_desc", pageInfo.description);

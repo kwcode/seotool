@@ -19,13 +19,13 @@
     "default_title": "TDK-Show",
     "default_popup": "popup.html"
   },
-  "content_scripts": [
-    {
-      "matches": [ "http://*/*", "https://*/*" ],
-      "js": [ "js/content_srcipt.js" ],
-      "run_at": "document_start"
-    }
-  ],
+  //"content_scripts": [
+  //  {
+  //    "matches": [ "http://*/*", "https://*/*" ],
+  //    "js": [ "js/content_srcipt.js" ],
+  //    "run_at": "document_start"
+  //  }
+  //],
   // 权限申请
   "permissions": [
     "tabs",
