@@ -91,6 +91,25 @@ chrome.contextMenus.create({
     }
 });
 
+
+//新窗口打开页面链接
+chrome.contextMenus.create({
+    "parentId": "SEO辅助工具",
+    "title": "新窗口打开页面链接",
+    "type": "normal",
+    "contexts": ["all"],
+    "onclick": function (info, tab) {
+        debugger;
+        var frameUrl = info.frameUrl;
+        if (typeof (frameUrl) != "undefined") {
+            window.open(frameUrl);
+        }
+        else {
+            window.open(info.pageUrl);
+        }
+    }
+});
+
 function getHost(url) {
 
     var reg = /^http(s)?:\/\/(.*?)\//
