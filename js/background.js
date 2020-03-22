@@ -1,3 +1,7 @@
+
+
+
+//创建右键菜单
 chrome.contextMenus.create({
     "id": "SEO辅助工具",
     "title": "SEO辅助工具",
@@ -5,26 +9,63 @@ chrome.contextMenus.create({
     "contexts": ["all"]
 });
 
+
+//新窗口打开页面链接
 chrome.contextMenus.create({
     "parentId": "SEO辅助工具",
-    "title": "百度搜索查询",
+    "title": "新窗口打开当前页面",
+    "type": "normal",
+    "contexts": ["all"],
+    "onclick": function (info, tab) {
+        debugger;
+        var frameUrl = info.frameUrl;
+        if (typeof (frameUrl) != "undefined") {
+            window.open(frameUrl);
+        }
+        else {
+            window.open(info.pageUrl);
+        }
+    }
+});
+//指数查询-百度
+chrome.contextMenus.create({
+    "parentId": "SEO辅助工具",
+    "title": "指数查询-百度",
     "type": "normal",
     "contexts": ["all"],
     "onclick": function (info, tab) {
         debugger;
         var sw = info.selectionText;
         if (typeof (sw) != "undefined") {
-            var url = "https://www.baidu.com/s?ie=utf-8&wd=" + sw;
+            var url = "http://index.baidu.com/v2/main/index.html#/trend/" + sw + "?words=" + sw;
             window.open(url);
         }
 
     }
 });
-
-//百度联想词
+//site命令
 chrome.contextMenus.create({
     "parentId": "SEO辅助工具",
-    "title": "百度联想词",
+    "title": "site:收录查询-百度",
+    "type": "normal",
+    "contexts": ["all"],
+    "onclick": function (info, tab) {
+        debugger;
+        var pageUrl = info.pageUrl;
+        if (typeof (pageUrl) != "undefined") {
+            var url = "https://www.baidu.com/s?wd=site:" + getHost(pageUrl);
+            window.open(url);
+        }
+        else {
+            alert("操作异常" + frameUrl); 
+        }
+    }
+});
+
+//百度下拉联想词
+chrome.contextMenus.create({
+    "parentId": "SEO辅助工具",
+    "title": "下拉联想词-百度",
     "type": "normal",
     "contexts": ["all"],
     "onclick": function (info, tab) {
@@ -38,20 +79,6 @@ chrome.contextMenus.create({
     }
 });
 
-chrome.contextMenus.create({
-    "parentId": "SEO辅助工具",
-    "title": "百度指数查询",
-    "type": "normal",
-    "contexts": ["all"],
-    "onclick": function (info, tab) {
-        debugger;
-        var sw = info.selectionText;
-        if (typeof (sw) != "undefined") {
-            var url = "http://index.baidu.com/v2/main/index.html#/trend/" + sw + "?words=" + sw;
-            window.open(url);
-        }
-    }
-});
 
 
 chrome.contextMenus.create({
@@ -92,23 +119,7 @@ chrome.contextMenus.create({
 });
 
 
-//新窗口打开页面链接
-chrome.contextMenus.create({
-    "parentId": "SEO辅助工具",
-    "title": "新窗口打开页面链接",
-    "type": "normal",
-    "contexts": ["all"],
-    "onclick": function (info, tab) {
-        debugger;
-        var frameUrl = info.frameUrl;
-        if (typeof (frameUrl) != "undefined") {
-            window.open(frameUrl);
-        }
-        else {
-            window.open(info.pageUrl);
-        }
-    }
-});
+
 
 function getHost(url) {
 
