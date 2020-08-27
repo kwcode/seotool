@@ -53,6 +53,25 @@ chrome.contextMenus.create({
         debugger;
         var pageUrl = info.pageUrl;
         if (typeof (pageUrl) != "undefined") {
+            var url = "https://www.google.com/s?q=site:" + getHost(pageUrl);
+            window.open(url);
+        }
+        else {
+            alert("操作异常" + frameUrl); 
+        }
+    }
+});
+
+//site命令
+chrome.contextMenus.create({
+    "parentId": "SEO辅助工具",
+    "title": "site:收录查询-谷歌",
+    "type": "normal",
+    "contexts": ["all"],
+    "onclick": function (info, tab) {
+        debugger;
+        var pageUrl = info.pageUrl;
+        if (typeof (pageUrl) != "undefined") {
             var url = "https://www.baidu.com/s?wd=site:" + getHost(pageUrl);
             window.open(url);
         }
